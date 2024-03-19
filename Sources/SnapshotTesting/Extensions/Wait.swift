@@ -29,3 +29,17 @@ extension Snapshotting {
       })
   }
 }
+
+extension Async {
+
+    /// Wraps the asynchronous operation within another which executes the original callback after the wait's `duration`
+    func wait(for duration: TimeInterval) -> Async<Value> {
+        return Async<Value> { callback in
+            run { value in
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                    callback(value)
+                }
+            }
+        }
+    }
+}
