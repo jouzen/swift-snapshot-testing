@@ -18,14 +18,14 @@
     ///     human eye.
     ///   - size: A view size override.
     ///   - traits: A trait collection override.
-    ///   - wait: The amount of time to wait before taking the snapshot.
+    ///   - delay: The amount of time to wait after rendering the view and before taking the snapshot.
     public static func image(
       on config: ViewImageConfig,
       precision: Float = 1,
       perceptualPrecision: Float = 1,
       size: CGSize? = nil,
       traits: UITraitCollection = .init(),
-      wait: TimeInterval = 0
+      delay: TimeInterval = 0
     )
       -> Snapshotting
     {
@@ -40,7 +40,7 @@
           traits: traits,
           view: viewController.view,
           viewController: viewController,
-          wait: wait
+          delay: delay
         )
       }
     }
