@@ -18,6 +18,7 @@
     ///     human eye.
     ///   - size: A view size override.
     ///   - traits: A trait collection override.
+    ///   - wait: The amount of time to wait before taking the snapshot.
     public static func image(
       on config: ViewImageConfig,
       precision: Float = 1,
