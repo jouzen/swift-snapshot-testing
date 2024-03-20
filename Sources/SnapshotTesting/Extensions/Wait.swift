@@ -8,7 +8,7 @@ extension Snapshotting {
   /// stack).
   ///
   /// - Parameters:
-  ///   - duration: The amount of time to wait before taking the snapshot.
+  ///   - duration: The amount of time to wait before setting up and running the strategy.
   ///   - strategy: The snapshot to invoke after the specified amount of time has passed.
   public static func wait(
     for duration: TimeInterval,
@@ -28,4 +28,18 @@ extension Snapshotting {
         }
       })
   }
+}
+
+extension Async {
+
+    /// Wraps the asynchronous operation within another which executes the original callback after the wait's `duration`.
+    func wait(for duration: TimeInterval) -> Async<Value> {
+        return Async<Value> { callback in
+            run { value in
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                    callback(value)
+                }
+            }
+        }
+    }
 }
